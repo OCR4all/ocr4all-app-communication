@@ -27,15 +27,23 @@ public class EventSPI extends Event<EventSPI.Type, String, Message> {
 	 */
 	public enum Type {
 		/**
-		 * the process was carried out without problems
+		 * The process was scheduled.
+		 */
+		scheduled,
+		/**
+		 * The process is running.
+		 */
+		running,
+		/**
+		 * the process was carried out without problems.
 		 */
 		completed,
 		/**
-		 * the process was aborted during execution
+		 * the process was aborted during execution.
 		 */
 		canceled,
 		/**
-		 * the process was interrupted due to failures
+		 * the process was interrupted due to failures.
 		 */
 		interrupted
 	}

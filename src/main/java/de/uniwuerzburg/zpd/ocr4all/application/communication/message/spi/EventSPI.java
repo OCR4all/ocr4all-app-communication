@@ -69,4 +69,22 @@ public class EventSPI extends Event<EventSPI.Type, String, Message> {
 		super(type, key, message);
 	}
 
+	/**
+	 * Returns true if the event type signals that the process is done.
+	 *
+	 * @return True if the event type signals that the process is done.
+	 * @since 1.8
+	 */
+	public boolean isDone() {
+		switch (getType()) {
+		case canceled:
+		case completed:
+		case interrupted:
+			return true;
+
+		default:
+			return false;
+		}
+	}
+
 }

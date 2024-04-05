@@ -39,4 +39,21 @@ public enum State {
 	 * The interrupted state.
 	 */
 	interrupted;
+
+	/**
+	 * Returns true if the job is done.
+	 * 
+	 * @return True if the job is done.
+	 * @since 17
+	 */
+	public boolean isDone() {
+		switch (this) {
+		case canceled:
+		case completed:
+		case interrupted:
+			return true;
+		default:
+			return false;
+		}
+	}
 }

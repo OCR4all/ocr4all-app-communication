@@ -7,7 +7,6 @@
  */
 package de.uniwuerzburg.zpd.ocr4all.application.communication.msa.api.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,21 +21,11 @@ import de.uniwuerzburg.zpd.ocr4all.application.communication.msa.job.ThreadPool;
  * @version 1.0
  * @since 17
  */
-public class JobResponse implements Serializable {
+public class JobResponse extends JobCoreResponse  {
 	/**
 	 * The serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * The id.
-	 */
-	private final int id;
-
-	/**
-	 * The state.
-	 */
-	private final State state;
 
 	/**
 	 * The created time.
@@ -93,9 +82,8 @@ public class JobResponse implements Serializable {
 	 */
 	public JobResponse(int id, State state, Date created, Date start, Date end, ThreadPool threadPool, String key,
 			String description, String message) {
-		super();
-		this.id = id;
-		this.state = state;
+		super(id, state);
+		
 		this.created = created;
 		this.start = start;
 		this.end = end;
@@ -103,26 +91,6 @@ public class JobResponse implements Serializable {
 		this.key = key;
 		this.description = description;
 		this.message = message;
-	}
-
-	/**
-	 * Returns the id.
-	 *
-	 * @return The id.
-	 * @since 17
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * Returns the state.
-	 *
-	 * @return The state.
-	 * @since 17
-	 */
-	public State getState() {
-		return state;
 	}
 
 	/**

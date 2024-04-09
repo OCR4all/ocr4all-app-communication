@@ -27,12 +27,21 @@ public class JobCoreResponse implements Serializable {
 	/**
 	 * The id.
 	 */
-	private final int id;
+	private int id;
 
 	/**
 	 * The state.
 	 */
-	private final State state;
+	private State state;
+
+	/**
+	 * Default constructor for a job core response for the api.
+	 * 
+	 * @since 17
+	 */
+	public JobCoreResponse() {
+		super();
+	}
 
 	/**
 	 * Creates a job core response for the api.
@@ -59,6 +68,16 @@ public class JobCoreResponse implements Serializable {
 	}
 
 	/**
+	 * Set the id.
+	 *
+	 * @param id The id to set.
+	 * @since 17
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
 	 * Returns the state.
 	 *
 	 * @return The state.
@@ -66,6 +85,16 @@ public class JobCoreResponse implements Serializable {
 	 */
 	public State getState() {
 		return state;
+	}
+
+	/**
+	 * Set the state.
+	 *
+	 * @param state The state to set.
+	 * @since 17
+	 */
+	public void setState(State state) {
+		this.state = state;
 	}
 
 }

@@ -21,7 +21,7 @@ import de.uniwuerzburg.zpd.ocr4all.application.communication.msa.job.ThreadPool;
  * @version 1.0
  * @since 17
  */
-public class JobResponse extends JobCoreResponse  {
+public class JobResponse extends JobCoreResponse {
 	/**
 	 * The serial version UID.
 	 */
@@ -31,40 +31,49 @@ public class JobResponse extends JobCoreResponse  {
 	 * The created time.
 	 */
 	@JsonProperty("created-time")
-	private final Date created;
+	private Date created;
 
 	/**
 	 * The start time.
 	 */
 	@JsonProperty("start-time")
-	private final Date start;
+	private Date start;
 
 	/**
 	 * The end time.
 	 */
 	@JsonProperty("end-time")
-	private final Date end;
+	private Date end;
 
 	/**
 	 * The thread pool.
 	 */
 	@JsonProperty("thread-pool")
-	private final ThreadPool threadPool;
+	private ThreadPool threadPool;
 
 	/**
 	 * The key.
 	 */
-	private final String key;
+	private String key;
 
 	/**
 	 * The description.
 	 */
-	private final String description;
+	private String description;
 
 	/**
 	 * The message.
 	 */
-	private final String message;
+	private String message;
+
+	/**
+	 * Default constructor for a job response for the api.
+	 * 
+	 * @since 17
+	 */
+	public JobResponse() {
+		super();
+	}
 
 	/**
 	 * Creates a job response for the api.
@@ -83,7 +92,7 @@ public class JobResponse extends JobCoreResponse  {
 	public JobResponse(int id, State state, Date created, Date start, Date end, ThreadPool threadPool, String key,
 			String description, String message) {
 		super(id, state);
-		
+
 		this.created = created;
 		this.start = start;
 		this.end = end;
@@ -104,6 +113,16 @@ public class JobResponse extends JobCoreResponse  {
 	}
 
 	/**
+	 * Set the created time.
+	 *
+	 * @param created The created time to set.
+	 * @since 17
+	 */
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	/**
 	 * Returns the start time.
 	 *
 	 * @return The start time.
@@ -111,6 +130,16 @@ public class JobResponse extends JobCoreResponse  {
 	 */
 	public Date getStart() {
 		return start;
+	}
+
+	/**
+	 * Set the start time.
+	 *
+	 * @param start The start time to set.
+	 * @since 17
+	 */
+	public void setStart(Date start) {
+		this.start = start;
 	}
 
 	/**
@@ -124,6 +153,16 @@ public class JobResponse extends JobCoreResponse  {
 	}
 
 	/**
+	 * Set the end time.
+	 *
+	 * @param end The end time to set.
+	 * @since 17
+	 */
+	public void setEnd(Date end) {
+		this.end = end;
+	}
+
+	/**
 	 * Returns the thread pool.
 	 *
 	 * @return The thread pool.
@@ -131,6 +170,16 @@ public class JobResponse extends JobCoreResponse  {
 	 */
 	public ThreadPool getThreadPool() {
 		return threadPool;
+	}
+
+	/**
+	 * Set the thread pool.
+	 *
+	 * @param threadPool The thread pool to set.
+	 * @since 17
+	 */
+	public void setThreadPool(ThreadPool threadPool) {
+		this.threadPool = threadPool;
 	}
 
 	/**
@@ -144,6 +193,16 @@ public class JobResponse extends JobCoreResponse  {
 	}
 
 	/**
+	 * Set the key.
+	 *
+	 * @param key The key to set.
+	 * @since 17
+	 */
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	/**
 	 * Returns the description.
 	 *
 	 * @return The description.
@@ -154,6 +213,16 @@ public class JobResponse extends JobCoreResponse  {
 	}
 
 	/**
+	 * Set the description.
+	 *
+	 * @param description The description to set.
+	 * @since 17
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
 	 * Returns the message.
 	 *
 	 * @return The message.
@@ -161,6 +230,16 @@ public class JobResponse extends JobCoreResponse  {
 	 */
 	public String getMessage() {
 		return message;
+	}
+
+	/**
+	 * Set the message.
+	 *
+	 * @param message The message to set.
+	 * @since 17
+	 */
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }

@@ -28,20 +28,29 @@ public class SystemJobResponse extends JobCoreResponse {
 	 * The system process standard output.
 	 */
 	@JsonProperty("standard-output")
-	private final String standardOutput;
+	private String standardOutput;
 
 	/**
 	 * The system process standard error.
 	 */
 	@JsonProperty("standard-error")
-	private final String standardError;
+	private String standardError;
 
 	/**
 	 * The exit value. By convention, the value 0 indicates normal termination. -1
 	 * if the exit value is not set.
 	 */
 	@JsonProperty("exit-value")
-	private final int exitValue;
+	private int exitValue;
+
+	/**
+	 * Default constructor for a system job response for the api.
+	 * 
+	 * @since 17
+	 */
+	public SystemJobResponse() {
+		super();
+	}
 
 	/**
 	 * Creates a system job response for the api.
@@ -69,6 +78,16 @@ public class SystemJobResponse extends JobCoreResponse {
 	}
 
 	/**
+	 * Set the system process standard output.
+	 *
+	 * @param standardOutput The standard output to set.
+	 * @since 17
+	 */
+	public void setStandardOutput(String standardOutput) {
+		this.standardOutput = standardOutput;
+	}
+
+	/**
 	 * Returns the system process standard error.
 	 *
 	 * @return The system process standard error.
@@ -76,6 +95,16 @@ public class SystemJobResponse extends JobCoreResponse {
 	 */
 	public String getStandardError() {
 		return standardError;
+	}
+
+	/**
+	 * Set the system process standard error.
+	 *
+	 * @param standardError The standard error to set.
+	 * @since 17
+	 */
+	public void setStandardError(String standardError) {
+		this.standardError = standardError;
 	}
 
 	/**
@@ -87,6 +116,17 @@ public class SystemJobResponse extends JobCoreResponse {
 	 */
 	public int getExitValue() {
 		return exitValue;
+	}
+
+	/**
+	 * Set the exit value. By convention, the value 0 indicates normal termination.
+	 * -1 if the exit value is not set.
+	 *
+	 * @param exitValue The exit value to set.
+	 * @since 17
+	 */
+	public void setExitValue(int exitValue) {
+		this.exitValue = exitValue;
 	}
 
 }

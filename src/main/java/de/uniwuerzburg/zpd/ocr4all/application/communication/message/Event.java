@@ -7,10 +7,7 @@
  */
 package de.uniwuerzburg.zpd.ocr4all.application.communication.message;
 
-import java.time.ZonedDateTime;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
+import java.util.Date;
 
 /**
  * Defines events.
@@ -38,7 +35,7 @@ public class Event<T extends Enum<?>, K, M extends Message> {
 	/**
 	 * The creation time.
 	 */
-	private final ZonedDateTime createdAt;
+	private final Date createdAt;
 
 	/**
 	 * Default constructor for an event with current creation time.
@@ -64,7 +61,7 @@ public class Event<T extends Enum<?>, K, M extends Message> {
 		this.key = key;
 		this.message = message;
 
-		this.createdAt = ZonedDateTime.now();
+		this.createdAt = new Date();
 	}
 
 	/**
@@ -103,8 +100,7 @@ public class Event<T extends Enum<?>, K, M extends Message> {
 	 * @return The creation time.
 	 * @since 17
 	 */
-	@JsonSerialize(using = ZonedDateTimeSerializer.class)
-	public ZonedDateTime getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 }

@@ -27,15 +27,23 @@ public class EventSPI extends Event<EventSPI.Type, String, Message> {
 	 */
 	public enum Type {
 		/**
-		 * the process was carried out without problems
+		 * The process was scheduled.
+		 */
+		scheduled,
+		/**
+		 * The process is running.
+		 */
+		running,
+		/**
+		 * the process was carried out without problems.
 		 */
 		completed,
 		/**
-		 * the process was aborted during execution
+		 * the process was aborted during execution.
 		 */
 		canceled,
 		/**
-		 * the process was interrupted due to failures
+		 * the process was interrupted due to failures.
 		 */
 		interrupted
 	}
@@ -59,6 +67,24 @@ public class EventSPI extends Event<EventSPI.Type, String, Message> {
 	 */
 	public EventSPI(Type type, String key, Message message) {
 		super(type, key, message);
+	}
+
+	/**
+	 * Returns true if the event type signals that the process is done.
+	 *
+	 * @return True if the event type signals that the process is done.
+	 * @since 1.8
+	 */
+	public boolean isDone() {
+		switch (getType()) {
+		case canceled:
+		case completed:
+		case interrupted:
+			return true;
+
+		default:
+			return false;
+		}
 	}
 
 }

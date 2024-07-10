@@ -78,6 +78,17 @@ public class JobResponse extends JobCoreResponse {
 	/**
 	 * Creates a job response for the api.
 	 * 
+	 * @param job The job response.
+	 * @since 17
+	 */
+	public JobResponse(JobResponse job) {
+		this(job.getId(), job.getState(), job.getCreated(), job.getStart(), job.getEnd(), job.getThreadPool(),
+				job.getKey(), job.getDescription(), job.getMessage());
+	}
+
+	/**
+	 * Creates a job response for the api.
+	 * 
 	 * @param id          The id.
 	 * @param state       The state.
 	 * @param created     The created time.

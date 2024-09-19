@@ -8,6 +8,8 @@
 package de.uniwuerzburg.zpd.ocr4all.application.communication.action;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Defines evaluation measures for actions.
@@ -55,24 +57,24 @@ public class EvaluationMeasure implements Serializable {
 	private String message;
 
 	/**
-	 * The error rate.
+	 * The system process standard output.
 	 */
-	private float errorRate;
+	private String standardOutput;
 
 	/**
-	 * The errs.
+	 * The system process standard error.
 	 */
-	private int errs;
+	private String standardError;
 
 	/**
-	 * The total characters.
+	 * The summary.
 	 */
-	private int totalCharacters;
+	private Summary summary;
 
 	/**
-	 * The sync errs.
+	 * The details.
 	 */
-	private int syncErrs;
+	private List<Detail> details;
 
 	/**
 	 * Default constructor of an evaluation measure for an action.
@@ -95,26 +97,36 @@ public class EvaluationMeasure implements Serializable {
 
 		this.state = state;
 		this.message = message;
+
+		standardOutput = null;
+		standardError = null;
+
+		summary = null;
+		details = null;
 	}
 
 	/**
-	 * Creates an evaluation measure for an action.
+	 * Creates an evaluation measure for an action. The measurement details is
+	 * initialized with an empty array.
 	 * 
-	 * @param state           The state.
-	 * @param errorRate       The error rate.
-	 * @param errs            The errs.
-	 * @param totalCharacters The total characters.
-	 * @param syncErrs        The sync errs.
+	 * @param state          The state.
+	 * @param standardOutput The system process standard output.
+	 * @param standardError  The system process standard error.
+	 * @param summary        The summary.
 	 * @since 17
 	 */
-	public EvaluationMeasure(State state, float errorRate, int errs, int totalCharacters, int syncErrs) {
+	public EvaluationMeasure(State state, String standardOutput, String standardError, Summary summary) {
 		super();
 
 		this.state = state;
-		this.errorRate = errorRate;
-		this.errs = errs;
-		this.totalCharacters = totalCharacters;
-		this.syncErrs = syncErrs;
+		message = null;
+
+		this.standardOutput = standardOutput;
+		this.standardError = standardError;
+
+		this.summary = summary;
+		details = new ArrayList<>();
+
 	}
 
 	/**
@@ -158,93 +170,234 @@ public class EvaluationMeasure implements Serializable {
 	}
 
 	/**
-	 * Returns the error rate.
+	 * Returns the system process standard output.
 	 *
-	 * @return The error rate.
+	 * @return The system process standard output.
 	 * @since 17
 	 */
-	public float getErrorRate() {
-		return errorRate;
+	public String getStandardOutput() {
+		return standardOutput;
 	}
 
 	/**
-	 * Set the error rate.
+	 * Set the system process standard output.
 	 *
-	 * @param errorRate The error rate to set.
+	 * @param standardOutput The standard output to set.
 	 * @since 17
 	 */
-	public void setErrorRate(float errorRate) {
-		this.errorRate = errorRate;
+	public void setStandardOutput(String standardOutput) {
+		this.standardOutput = standardOutput;
 	}
 
 	/**
-	 * Returns the errs.
+	 * Returns the system process standard error.
 	 *
-	 * @return The errs.
+	 * @return The system process standard error.
 	 * @since 17
 	 */
-	public int getErrs() {
-		return errs;
+	public String getStandardError() {
+		return standardError;
 	}
 
 	/**
-	 * Set the errs.
+	 * Set the system process standard error.
 	 *
-	 * @param errs The errs to set.
+	 * @param standardError The standard error to set.
 	 * @since 17
 	 */
-	public void setErrs(int errs) {
-		this.errs = errs;
+	public void setStandardError(String standardError) {
+		this.standardError = standardError;
 	}
 
 	/**
-	 * Returns the total characters.
+	 * Returns the summary.
 	 *
-	 * @return The total characters.
+	 * @return The summary.
 	 * @since 17
 	 */
-	public int getTotalCharacters() {
-		return totalCharacters;
+	public Summary getSummary() {
+		return summary;
 	}
 
 	/**
-	 * Set the total characters.
+	 * Set the summary.
 	 *
-	 * @param totalCharacters The total characters to set.
+	 * @param summary The summary to set.
 	 * @since 17
 	 */
-	public void setTotalCharacters(int totalCharacters) {
-		this.totalCharacters = totalCharacters;
+	public void setSummary(Summary summary) {
+		this.summary = summary;
 	}
 
 	/**
-	 * Returns the sync errs.
+	 * Returns the details.
 	 *
-	 * @return The sync errs.
+	 * @return The details.
 	 * @since 17
 	 */
-	public int getSyncErrs() {
-		return syncErrs;
+	public List<Detail> getDetails() {
+		return details;
 	}
 
 	/**
-	 * Set the sync errs.
+	 * Set the details.
 	 *
-	 * @param syncErrs The sync errs to set.
+	 * @param details The details to set.
 	 * @since 17
 	 */
-	public void setSyncErrs(int syncErrs) {
-		this.syncErrs = syncErrs;
+	public void setDetails(List<Detail> details) {
+		this.details = details;
 	}
 
 	/**
-	 * Defines measure details.
+	 * Defines summaries.
 	 *
 	 * @author <a href="mailto:herbert.baier@uni-wuerzburg.de">Herbert Baier</a>
 	 * @version 1.0
 	 * @since 17
 	 */
-	public static class MeasureDetail implements Serializable {
+	public static class Summary implements Serializable {
+		/**
+		 * The serial version UID.
+		 */
+		private static final long serialVersionUID = 1L;
+
+		/**
+		 * The error rate.
+		 */
+		private float errorRate;
+
+		/**
+		 * The errs.
+		 */
+		private int errs;
+
+		/**
+		 * The total characters.
+		 */
+		private int totalCharacters;
+
+		/**
+		 * The sync errs.
+		 */
+		private int syncErrs;
+
+		/**
+		 * Default constructor for a summary.
+		 * 
+		 * @since 17
+		 */
+		public Summary() {
+			super();
+		}
+
+		/**
+		 * Creates a summary.
+		 * 
+		 * @param errorRate       The error rate.
+		 * @param errs            The errs.
+		 * @param totalCharacters The total characters.
+		 * @param syncErrs        The sync errs.
+		 * @since 17
+		 */
+		public Summary(float errorRate, int errs, int totalCharacters, int syncErrs) {
+			super();
+			this.errorRate = errorRate;
+			this.errs = errs;
+			this.totalCharacters = totalCharacters;
+			this.syncErrs = syncErrs;
+		}
+
+		/**
+		 * Returns the error rate.
+		 *
+		 * @return The error rate.
+		 * @since 17
+		 */
+		public float getErrorRate() {
+			return errorRate;
+		}
+
+		/**
+		 * Set the error rate.
+		 *
+		 * @param errorRate The error rate to set.
+		 * @since 17
+		 */
+		public void setErrorRate(float errorRate) {
+			this.errorRate = errorRate;
+		}
+
+		/**
+		 * Returns the errs.
+		 *
+		 * @return The errs.
+		 * @since 17
+		 */
+		public int getErrs() {
+			return errs;
+		}
+
+		/**
+		 * Set the errs.
+		 *
+		 * @param errs The errs to set.
+		 * @since 17
+		 */
+		public void setErrs(int errs) {
+			this.errs = errs;
+		}
+
+		/**
+		 * Returns the total characters.
+		 *
+		 * @return The total characters.
+		 * @since 17
+		 */
+		public int getTotalCharacters() {
+			return totalCharacters;
+		}
+
+		/**
+		 * Set the total characters.
+		 *
+		 * @param totalCharacters The total characters to set.
+		 * @since 17
+		 */
+		public void setTotalCharacters(int totalCharacters) {
+			this.totalCharacters = totalCharacters;
+		}
+
+		/**
+		 * Returns the sync errs.
+		 *
+		 * @return The sync errs.
+		 * @since 17
+		 */
+		public int getSyncErrs() {
+			return syncErrs;
+		}
+
+		/**
+		 * Set the sync errs.
+		 *
+		 * @param syncErrs The sync errs to set.
+		 * @since 17
+		 */
+		public void setSyncErrs(int syncErrs) {
+			this.syncErrs = syncErrs;
+		}
+
+	}
+
+	/**
+	 * Defines details.
+	 *
+	 * @author <a href="mailto:herbert.baier@uni-wuerzburg.de">Herbert Baier</a>
+	 * @version 1.0
+	 * @since 17
+	 */
+	public static class Detail implements Serializable {
 		/**
 		 * The serial version UID.
 		 */
@@ -275,7 +428,7 @@ public class EvaluationMeasure implements Serializable {
 		 * 
 		 * @since 17
 		 */
-		public MeasureDetail() {
+		public Detail() {
 			super();
 		}
 
@@ -288,7 +441,7 @@ public class EvaluationMeasure implements Serializable {
 		 * @param cer         The cer.
 		 * @since 17
 		 */
-		public MeasureDetail(String groundTruth, String prediction, int count, float cer) {
+		public Detail(String groundTruth, String prediction, int count, float cer) {
 			super();
 			this.groundTruth = groundTruth;
 			this.prediction = prediction;

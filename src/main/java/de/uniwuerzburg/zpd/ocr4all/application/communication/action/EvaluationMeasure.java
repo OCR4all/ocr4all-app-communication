@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Defines evaluation measures for actions.
  *
@@ -59,11 +61,13 @@ public class EvaluationMeasure implements Serializable {
 	/**
 	 * The system process standard output.
 	 */
+	@JsonProperty("standard-output")
 	private String standardOutput;
 
 	/**
 	 * The system process standard error.
 	 */
+	@JsonProperty("standard-error")
 	private String standardError;
 
 	/**
@@ -265,6 +269,7 @@ public class EvaluationMeasure implements Serializable {
 		/**
 		 * The error rate.
 		 */
+		@JsonProperty("error-rate")
 		private float errorRate;
 
 		/**
@@ -275,11 +280,13 @@ public class EvaluationMeasure implements Serializable {
 		/**
 		 * The total characters.
 		 */
+		@JsonProperty("total-characters")
 		private int totalCharacters;
 
 		/**
 		 * The sync errs.
 		 */
+		@JsonProperty("sync-errs")
 		private int syncErrs;
 
 		/**
@@ -406,6 +413,7 @@ public class EvaluationMeasure implements Serializable {
 		/**
 		 * The ground truth.
 		 */
+		@JsonProperty("ground-truth")
 		private String groundTruth;
 
 		/**

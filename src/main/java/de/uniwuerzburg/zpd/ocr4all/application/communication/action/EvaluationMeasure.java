@@ -13,6 +13,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import de.uniwuerzburg.zpd.ocr4all.application.communication.spi.ServiceProviderTask;
+
 /**
  * Defines evaluation measures for actions.
  *
@@ -20,55 +22,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @version 1.0
  * @since 17
  */
-public class EvaluationMeasure implements Serializable {
+public class EvaluationMeasure extends ServiceProviderTask {
 	/**
 	 * The serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Defines states.
-	 *
-	 * @author <a href="mailto:herbert.baier@uni-wuerzburg.de">Herbert Baier</a>
-	 * @version 1.0
-	 * @since 1.8
-	 */
-	public enum State {
-		/**
-		 * The completed state.
-		 */
-		completed,
-		/**
-		 * The inconsistent state.
-		 */
-		inconsistent,
-		/**
-		 * The interrupted state.
-		 */
-		interrupted;
-	}
-
-	/**
-	 * The state.
-	 */
-	private State state;
-
-	/**
-	 * The message.
-	 */
-	private String message;
-
-	/**
-	 * The system process standard output.
-	 */
-	@JsonProperty("standard-output")
-	private String standardOutput;
-
-	/**
-	 * The system process standard error.
-	 */
-	@JsonProperty("standard-error")
-	private String standardError;
 
 	/**
 	 * The summary.
@@ -92,18 +50,40 @@ public class EvaluationMeasure implements Serializable {
 	/**
 	 * Creates an evaluation measure for an action.
 	 * 
-	 * @param state   The state.
-	 * @param message The message.
+	 * @param state The state.
 	 * @since 17
 	 */
-	public EvaluationMeasure(State state, String message) {
-		super();
+	public EvaluationMeasure(State state) {
+		super(state);
 
-		this.state = state;
-		this.message = message;
+		summary = null;
+		details = null;
+	}
 
-		standardOutput = null;
-		standardError = null;
+	/**
+	 * Creates an evaluation measure for an action.
+	 * 
+	 * @param state      The state.
+	 * @param stackTrace The throwable and its backtrace stack trace that indicates
+	 *                   conditions that an application might want to examine.
+	 * @since 17
+	 */
+	public EvaluationMeasure(State state, String stackTrace) {
+		super(state, stackTrace);
+
+		summary = null;
+		details = null;
+	}
+
+	/**
+	 * Creates an evaluation measure for an action.
+	 * 
+	 * @param state     The state.
+	 * @param exception The exception.
+	 * @since 17
+	 */
+	public EvaluationMeasure(State state, Exception exception) {
+		super(state, exception);
 
 		summary = null;
 		details = null;
@@ -120,97 +100,11 @@ public class EvaluationMeasure implements Serializable {
 	 * @since 17
 	 */
 	public EvaluationMeasure(State state, String standardOutput, String standardError, Summary summary) {
-		super();
-
-		this.state = state;
-		message = null;
-
-		this.standardOutput = standardOutput;
-		this.standardError = standardError;
+		super(state, standardOutput, standardError);
 
 		this.summary = summary;
 		details = new ArrayList<>();
 
-	}
-
-	/**
-	 * Returns the state.
-	 *
-	 * @return The state.
-	 * @since 17
-	 */
-	public State getState() {
-		return state;
-	}
-
-	/**
-	 * Set the state.
-	 *
-	 * @param state The state to set.
-	 * @since 17
-	 */
-	public void setState(State state) {
-		this.state = state;
-	}
-
-	/**
-	 * Returns the message.
-	 *
-	 * @return The message.
-	 * @since 17
-	 */
-	public String getMessage() {
-		return message;
-	}
-
-	/**
-	 * Set the message.
-	 *
-	 * @param message The message to set.
-	 * @since 17
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	/**
-	 * Returns the system process standard output.
-	 *
-	 * @return The system process standard output.
-	 * @since 17
-	 */
-	public String getStandardOutput() {
-		return standardOutput;
-	}
-
-	/**
-	 * Set the system process standard output.
-	 *
-	 * @param standardOutput The standard output to set.
-	 * @since 17
-	 */
-	public void setStandardOutput(String standardOutput) {
-		this.standardOutput = standardOutput;
-	}
-
-	/**
-	 * Returns the system process standard error.
-	 *
-	 * @return The system process standard error.
-	 * @since 17
-	 */
-	public String getStandardError() {
-		return standardError;
-	}
-
-	/**
-	 * Set the system process standard error.
-	 *
-	 * @param standardError The standard error to set.
-	 * @since 17
-	 */
-	public void setStandardError(String standardError) {
-		this.standardError = standardError;
 	}
 
 	/**
